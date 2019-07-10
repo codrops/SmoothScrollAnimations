@@ -1,0 +1,248 @@
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+:root {
+	font-size: 16px;
+}
+
+body {
+	margin: 0;
+	--color-text: #1c1b1b;
+	--color-bg: #efe6e1;
+	--color-link: #b07656;
+	--color-link-hover: #000;
+	--color-deco: #e4dbd6;
+	color: var(--color-text);
+	background-color: var(--color-bg);
+	font-family: mr-eaves-xl-sans, sans-serif;
+}
+
+/* Page Loader */
+.js .loading::before {
+	content: '';
+	position: fixed;
+	z-index: 100000;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--color-bg);
+}
+
+.js .loading::after {
+	content: '';
+	position: fixed;
+	z-index: 100000;
+	top: 50%;
+	left: 50%;
+	width: 60px;
+	height: 60px;
+	margin: -30px 0 0 -30px;
+	pointer-events: none;
+	border-radius: 50%;
+	opacity: 0.4;
+	background: var(--color-link);
+	animation: loaderAnim 0.7s linear infinite alternate forwards;
+}
+
+@keyframes loaderAnim {
+	to {
+		opacity: 1;
+		transform: scale3d(0.5,0.5,1);
+	}
+}
+
+a {
+	text-decoration: none;
+	color: var(--color-link);
+	outline: none;
+}
+
+a:hover,
+a:focus {
+	color: var(--color-link-hover);
+	outline: none;
+}
+
+[data-scroll] {
+	will-change: transform;
+}
+
+.frame {
+	padding: 2.5rem 3rem;
+	position: absolute;
+	z-index: 10;
+}
+
+.frame__title {
+	font-size: 1rem;
+	margin: 0 0 2.5rem;
+}
+
+.frame__links {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.frame a {
+	margin: 0.25rem 0;
+	text-transform: lowercase;
+}
+
+.frame__github,
+.frame__links a:not(:last-child),
+.frame__demos a:not(:last-child) {
+	margin-right: 1rem;
+}
+
+.frame__demos {
+	margin: 1rem 0;
+}
+
+.frame__demo--current,
+.frame__demo--current:hover {
+	color: var(--color-text);
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	align-items: center;
+	padding: 12rem 0;
+	counter-reset: figure; 
+}
+
+.item {
+	margin: 10vh auto;
+	max-width: 100%;
+	position: relative;
+	will-change: transform;
+}
+
+.item::before {
+	counter-increment: figure;
+	content: counter(figure, decimal-leading-zero);
+	position: absolute;
+	font-family: paralucent, sans-serif;
+	font-size: 10rem;
+	color: var(--color-deco);
+	bottom: calc(100% - 3rem);
+}
+
+.item:nth-child(even)::before {
+	right: 0;
+}
+
+.item__img-wrap {
+	--aspect-ratio: 1/1.5;
+	overflow: hidden;
+	width: 500px;
+	margin: 0 auto;
+	padding-bottom: calc(100% / (var(--aspect-ratio)));
+	max-width: calc(100% - 2rem);
+	will-change: transform;
+}
+
+.item:first-child .item__img-wrap {
+	--aspect-ratio: 8/10;
+	--image: url(../img/1.jpg);
+}
+
+.item:nth-child(2) .item__img-wrap {
+	width: 1000px;
+	--aspect-ratio: 120/76;
+	--image: url(../img/2.jpg);
+}
+
+.item:nth-child(3) .item__img-wrap {
+	--aspect-ratio: 60/75;
+	--image: url(../img/3.jpg);
+}
+
+.item:nth-child(4) .item__img-wrap {
+	width: 800px;
+	--aspect-ratio: 900/505;
+	--image: url(../img/4.jpg);
+}
+
+.item:nth-child(5) .item__img-wrap {
+	--aspect-ratio: 6/8;
+	--image: url(../img/5.jpg);
+}
+
+.item:nth-child(6) .item__img-wrap {
+	width: calc(100vw - 2rem);
+	--aspect-ratio: 1500/844;
+	--image: url(../img/6.jpg);
+}
+
+.item:nth-child(7) .item__img-wrap {
+	width: 900px;
+	--aspect-ratio: 1000/749;
+	--image: url(../img/7.jpg);
+}
+
+.item:nth-child(8) .item__img-wrap {
+	width: 900px;
+	--aspect-ratio: 1000/562;
+	--image: url(../img/8.jpg);
+}
+
+.item:nth-child(9) .item__img-wrap {
+	--aspect-ratio: 60/75;
+	--image: url(../img/9.jpg);
+}
+
+.item__img {
+	--overflow: 40px;
+	height: calc(100% + (2 * var(--overflow)));
+	top: calc( -1 * var(--overflow));
+	width: 100%;
+	position: absolute;
+	background-image: var(--image);
+	background-size: cover;
+	background-position: 50% 0%;
+	will-change: transform;
+}
+
+.item__img--t1 {
+	--overflow: 60px;
+}
+
+.item__img--t2 {
+	--overflow: 80px;
+}
+
+.item__img--t3 {
+	--overflow: 120px;
+}
+
+.item__caption {
+	padding: 2rem 1rem;
+}
+
+.item__caption-title {
+	font-family: paralucent, sans-serif;
+	font-weight: 400;
+	font-size: 3rem;
+	margin: 0;
+}
+
+.item__caption-copy {
+	margin: 0;
+}
+
+.item__caption-copy::before {
+	content: '__';
+	line-height: 1;
+	color: var(--color-link);
+	font-weight: 700;
+	font-size: 3rem;
+	margin: 0 0 1rem;
+	display: block;
+}
