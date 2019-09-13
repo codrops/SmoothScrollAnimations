@@ -184,9 +184,14 @@
         render() {
             // update the current and interpolated values
             for (const key in this.renderedStyles ) {
+
+            // Setting a min translateY cap to avoid interpolation bug when scrolling position is 0
+                const prev = this.renderedStyles[key].previous < 0.1 ? 0 : this.renderedStyles[key].previous
+
                 this.renderedStyles[key].current = this.renderedStyles[key].setValue();
-                this.renderedStyles[key].previous = MathUtils.lerp(this.renderedStyles[key].previous, this.renderedStyles[key].current, this.renderedStyles[key].ease);
+                this.renderedStyles[key].previous = MathUtils.lerp(prev, this.renderedStyles[key].current, this.renderedStyles[key].ease);
             }
+
             // and translate the scrollable element
             this.layout();
             
